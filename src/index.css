@@ -6,6 +6,24 @@ body {
     font-family: "Open Sans", sans-serif;
 }
 
+.header-customization {
+    padding-bottom: 10px;
+}
+
+.property-customization {
+    padding-right: 5px;
+}
+
+.button-customization {
+    padding: 15px;
+}
+
+@media (max-width: 441px) {
+    .button-customization {
+        padding: 30px;
+    }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
