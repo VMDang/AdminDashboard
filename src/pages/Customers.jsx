@@ -1,4 +1,5 @@
 import React from "react";
+import {Helmet, HelmetProvider} from "react-helmet-async";
 import {
     GridComponent, ColumnsDirective, ColumnDirective, Page, Selection,
     Inject, Edit, Toolbar, Sort, Filter, Search
@@ -9,21 +10,27 @@ import { Header } from "../components";
 
 const Customers = () => {
     return (
-        <div className={"m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl"}>
-            <Header title={"Customers"} category={"Page"} />
-            <GridComponent id={"girdComp"} dataSource={customersData} allowPaging allowSorting
-                           toolbar={['Search', 'Add', 'Delete', 'Edit']} width={"auto"}
-                            editSettings={{ allowSearching: true, allowAdding: true, allowDeleting: true, allowEditing: true }} >
-                <ColumnsDirective>
-                    {
-                        customersGrid.map((item, index) => (
-                            <ColumnDirective key={index} {...item} />
-                        ))
-                    }
-                </ColumnsDirective>
-                <Inject services={[ Page, Toolbar, Selection, Edit, Sort, Filter, Search]} />
-            </GridComponent>
-        </div>
+        <HelmetProvider>
+            <Helmet>
+                <title> Customers </title>
+            </Helmet>
+
+            <div className={"m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl"}>
+                <Header title={"Customers"} category={"Page"} />
+                <GridComponent id={"girdComp"} dataSource={customersData} allowPaging allowSorting
+                               toolbar={['Search', 'Add', 'Delete', 'Edit']} width={"auto"}
+                               editSettings={{ allowSearching: true, allowAdding: true, allowDeleting: true, allowEditing: true }} >
+                    <ColumnsDirective>
+                        {
+                            customersGrid.map((item, index) => (
+                                <ColumnDirective key={index} {...item} />
+                            ))
+                        }
+                    </ColumnsDirective>
+                    <Inject services={[ Page, Toolbar, Selection, Edit, Sort, Filter, Search]} />
+                </GridComponent>
+            </div>
+        </HelmetProvider>
     )
 }
 
