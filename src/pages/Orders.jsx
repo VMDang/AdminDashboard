@@ -1,4 +1,5 @@
 import React from "react";
+import {Helmet, HelmetProvider} from "react-helmet-async";
 import {
     GridComponent, ColumnsDirective, ColumnDirective, Resize, Sort, ContextMenu,
     Filter, Page, ExcelExport, PdfExport, Edit, Inject, Toolbar, Grid
@@ -93,20 +94,26 @@ const Orders = () => {
     }
     
     return (
-        <div className={"m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl"}>
-            <Header title={"Orders"} category={"Page"} />
-            <GridComponent id={"grid"} dataSource={ordersData} allowPaging allowSorting toolbar={['PdfExport', 'ExcelExport']}
-                allowPdfExport allowExcelExport toolbarClick={toolbarClick} ref={g => grid = g}>
-                <ColumnsDirective>
-                    {
-                        ordersGrid.map((item, index) => (
-                            <ColumnDirective key={index} {...item} />
-                        ))
-                    }
-                </ColumnsDirective>
-                <Inject services={[Resize, Sort, ContextMenu, Filter, ExcelExport, Edit, PdfExport, Page, Toolbar]} />
-            </GridComponent>
-        </div>
+        <HelmetProvider>
+            <Helmet>
+                <title> Order </title>
+            </Helmet>
+
+            <div className={"m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl"}>
+                <Header title={"Orders"} category={"Page"} />
+                <GridComponent id={"grid"} dataSource={ordersData} allowPaging allowSorting toolbar={['PdfExport', 'ExcelExport']}
+                               allowPdfExport allowExcelExport toolbarClick={toolbarClick} ref={g => grid = g}>
+                    <ColumnsDirective>
+                        {
+                            ordersGrid.map((item, index) => (
+                                <ColumnDirective key={index} {...item} />
+                            ))
+                        }
+                    </ColumnsDirective>
+                    <Inject services={[Resize, Sort, ContextMenu, Filter, ExcelExport, Edit, PdfExport, Page, Toolbar]} />
+                </GridComponent>
+            </div>
+        </HelmetProvider>
     )
 }
 

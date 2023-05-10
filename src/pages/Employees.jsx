@@ -3,23 +3,30 @@ import {GridComponent, ColumnsDirective, ColumnDirective, Page, Search, Inject, 
 
 import { employeesData, employeesGrid } from "../data/dummy";
 import { Header } from "../components";
+import {Helmet, HelmetProvider} from "react-helmet-async";
 
 const Employees = () => {
     return (
-        <div className={"m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl"}>
-            <Header title={"Employees"} category={"Page"} />
-            <GridComponent id={"girdComp"} dataSource={employeesData} allowPaging allowSorting
-            toolbar={['Search']} width={"auto"}>
-                <ColumnsDirective>
-                    {
-                        employeesGrid.map((item, index) => (
-                            <ColumnDirective key={index} {...item} />
-                        ))
-                    }
-                </ColumnsDirective>
-                <Inject services={[Search, Page, Toolbar]} />
-            </GridComponent>
-        </div>
+        <HelmetProvider>
+            <Helmet>
+                <title> Employees </title>
+            </Helmet>
+
+            <div className={"m-2 md:m-10 p-2 md:p-10 bg-white rounded-3xl"}>
+                <Header title={"Employees"} category={"Page"} />
+                <GridComponent id={"girdComp"} dataSource={employeesData} allowPaging allowSorting
+                               toolbar={['Search']} width={"auto"}>
+                    <ColumnsDirective>
+                        {
+                            employeesGrid.map((item, index) => (
+                                <ColumnDirective key={index} {...item} />
+                            ))
+                        }
+                    </ColumnsDirective>
+                    <Inject services={[Search, Page, Toolbar]} />
+                </GridComponent>
+            </div>
+        </HelmetProvider>
     )
 }
 
