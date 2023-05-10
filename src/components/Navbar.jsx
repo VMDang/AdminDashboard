@@ -12,7 +12,7 @@ import { useStateContext } from "../contexts/ContextProvider";
 
 const NavButton = ({ title, customFunc, icon, color, dotColor}) => (
     <TooltipComponent content={title} position={"BottomCenter"}>
-        <button type={"button"} onClick={customFunc} style={{color}}
+        <button type={"button"} onClick={ () => customFunc()} style={{color}}
             className={"relative text-xl rounded-full p-3 hover:bg-light-gray"}>
                 <span style={{background: dotColor}}
                       className={"absolute inline-flex rounded-full h-2 w-2 right-2 top-2"} />
@@ -22,7 +22,7 @@ const NavButton = ({ title, customFunc, icon, color, dotColor}) => (
 )
 
 const Navbar = () => {
-    const { activeMenu, setActiveMenu, isClicked, setIsClicked, handleClick,
+    const { activeMenu, setActiveMenu, isClicked, handleClick,
             screenSize, setScreenSize, currentColor } = useStateContext();
 
     useEffect(() => {
@@ -53,14 +53,14 @@ const Navbar = () => {
                            color={currentColor} icon={<FiShoppingCart/>}
                 />
                 <NavButton title={"Chat"} customFunc={() => handleClick('chat')}
-                           dotColor={"#03C9D7"} color={currentColor} icon={<BsChatLeft/>}
+                           dotColor={"#dc2626"} color={currentColor} icon={<BsChatLeft/>}
                 />
                 <NavButton title={"Notification"} customFunc={() => handleClick('notification')}
-                           dotColor={"#03C9D7"} color={currentColor} icon={<RiNotification3Line/>}
+                           dotColor={"#dc2626"} color={currentColor} icon={<RiNotification3Line/>}
                 />
                 <TooltipComponent content={"Profile"} position={"BottomCenter"}>
                     <div className={"flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"}
-                    onClick={() => handleClick("userProfile")} >
+                    onClick={() => handleClick('userProfile')} >
                         <img src={avatar} className={"rounded-full w-8 h-8"}  alt={"User Avatar"}/>
                         <p>
                             <span className={"text-gray-400 text-14"} >Hi, </span> {' '}
